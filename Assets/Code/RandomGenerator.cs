@@ -13,22 +13,29 @@ public class RandomGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject nuevoobst = Instantiate(obst);
-        nuevoobst.transform.position = transform.position + new Vector3(0, 0, 0);
+        
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (tinicial>tmax)
+
+       // Debug.Log(tinicial);
+        if (tinicial>=tmax)
         {
             GameObject nuevoobst = Instantiate(obst);
-            nuevoobst.transform.position = transform.position + new Vector3(0, Random.Range(-altura, altura), 0);
+            nuevoobst.transform.position = transform.position + new Vector3(0, 0, 0);
+
+            Debug.Log("INSTANCIA CADA 3");
+            tinicial = 0;
+            //nuevoobst.transform.position = transform.position + new Vector3(0, Random.Range(-altura, altura), 0);
         }
         else
         {
+            
             tinicial += Time.deltaTime;
+            
         }
     }
 }

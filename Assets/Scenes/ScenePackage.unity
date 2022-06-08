@@ -826,9 +826,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tmax: 3
-  tinicial: 0
+  tinicial: 1
   obst: {fileID: 1717286176}
-  altura: 0
+  altura: 3
 --- !u!212 &1717286179
 SpriteRenderer:
   m_ObjectHideFlags: 0
