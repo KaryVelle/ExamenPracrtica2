@@ -5,10 +5,16 @@ using UnityEngine;
 public class RandomGenerator : MonoBehaviour
 {
 
-    public float tmax = 3;
-    public float tinicial = 0;
-    public GameObject obst;
+    public float tmaxenemy = 3;
+    public float tmaxpoints = 5;
+    public float tinicialenemy = 0;
+    public float tinicialpoints = 0;
+    public GameObject points;
+    public GameObject enemy;
     public float altura= 4f;
+    private float currentscore;
+
+    public Points pointsController;
     
 
 
@@ -16,6 +22,8 @@ public class RandomGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        
         
 
     }
@@ -23,22 +31,54 @@ public class RandomGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        currentscore = pointsController.score;
 
-       // Debug.Log(tinicial);
-        if (tinicial>=tmax)
+        if (currentscore>=5)
         {
-            GameObject nuevoobst = Instantiate(obst);
-            nuevoobst.transform.position = new Vector3(9, 0, 0);
-            nuevoobst.transform.position =  new Vector3(9, Random.Range(-altura, altura), 0);
+            tmaxenemy = 3;
+
+         
+        }
+        if (currentscore >= 7)
+        {
+            tmaxenemy = 1;
+
+
+        }
+
+        // Spawner Enemies
+        if (tinicialenemy >= tmaxenemy)
+        {
+            GameObject nuevoobst = Instantiate(enemy);
+            nuevoobst.transform.position = new Vector3(this.transform.position.x, 0, 0);
+            nuevoobst.transform.position = new Vector3(this.transform.position.x, Random.Range(-altura, altura), 0);
+
+
+            //Debug.Log("INSTANCIA CADA 3");
+            tinicialenemy = 0;
+        }
+        else
+        {
+
+            tinicialenemy += Time.deltaTime;
+
+        }
+
+        // Spawner Points
+        if (tinicialpoints>=tmaxpoints)
+        {
+            GameObject nuevoobst = Instantiate(points);
+            nuevoobst.transform.position = new Vector3(this.transform.position.x, 0, 0);
+            nuevoobst.transform.position =  new Vector3(this.transform.position.x, Random.Range(-altura, altura), 0);
             
 
             //Debug.Log("INSTANCIA CADA 3");
-            tinicial = 0;
+            tinicialpoints = 0;
         }
         else
         {
             
-            tinicial += Time.deltaTime;
+            tinicialpoints += Time.deltaTime;
             
         }
     }

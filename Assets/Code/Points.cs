@@ -4,7 +4,9 @@ using UnityEngine;
 using TMPro;
 
 public class Points : MonoBehaviour
+
 {
+    public GameObject gameoverpanel;
     // Start is called before the first frame update
     public static Points instance;
     public int score = 0;
@@ -12,8 +14,11 @@ public class Points : MonoBehaviour
 
     void Start()
     {
+        
         instance = this;
         score = 0;
+        gameoverpanel = GameObject.FindWithTag("Panel");
+        gameoverpanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -21,6 +26,11 @@ public class Points : MonoBehaviour
     {
         textscore.text = score.ToString();
 
+    }
+    public void GameOver()
+    {
+        gameoverpanel.SetActive(true);
+        MoveCat.instance.isgameover = true;
     }
 }
 

@@ -5,11 +5,12 @@ using UnityEngine;
 public class MoveCat : MonoBehaviour
 {
     // Start is called before the first frame update
-
+    public bool isgameover;
     Rigidbody2D sans;
     public float maxspeed;
     bool volteaderecha = true;
     SpriteRenderer sansvoltea;
+    public static MoveCat instance;
 
     // saltar 
 
@@ -22,6 +23,8 @@ public class MoveCat : MonoBehaviour
 
     void Start()
     {
+        instance = this;
+        isgameover = false;
         sans = GetComponent<Rigidbody2D>();
         sansvoltea = GetComponent<SpriteRenderer>(); // funcion voltear
     }
@@ -29,7 +32,7 @@ public class MoveCat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (puedoaccion && suelo && Input.GetAxis("Jump") > 0)
+        if ((puedoaccion && suelo && Input.GetAxis("Jump") > 0)&&(isgameover==false))
         {
             sans.velocity = new Vector2(sans.velocity.x, 0f);
             sans.AddForce(new Vector2(0, quetantosaltas), ForceMode2D.Impulse);
@@ -48,7 +51,11 @@ public class MoveCat : MonoBehaviour
         {
             voltear();
         }
-        sans.velocity = new Vector2(mover * maxspeed, sans.velocity.y);
+        if (isgameover == false)
+        {
+            sans.velocity = new Vector2(mover * maxspeed, sans.velocity.y);
+        }
+        
     }
 
     void voltear()
