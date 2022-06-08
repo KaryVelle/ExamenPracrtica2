@@ -10,10 +10,17 @@ public class PointCounter : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D otherobject)
     {
-        Points.score++;
-        Destroy(gameObject);
+        if (otherobject.CompareTag("Player"))
+        {
+            Points.instance.score++;
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     // Update is called once per frame
